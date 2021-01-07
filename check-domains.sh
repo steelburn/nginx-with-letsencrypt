@@ -6,19 +6,23 @@ CERTED=$(ls $LIVEDIR)
 echo $CERTED
 echo $DOMAINS
 
-# Let's use the email address passed via environment variable, if provided. 
+# Let's use the email address passed via environment variable, if provided.
 if [[ -n ${EMAIL} ]]; then
- PARAM="-m ${EMAIL}"
+    PARAM="-m ${EMAIL}"
 else
- PARAM="--register-unsafely-without-email"
+    PARAM="--register-unsafely-without-email"
 fi
 
-for i in $DOMAINS;
-do
- if [[ ${CERTED[*]} =~ "${i}"  ]]; then
-   echo "Certificate already exist for ${i}"
- else
-   echo "No ready certificate for ${i}. We'll request for one."
-   certbot --nginx -n ${PARAM} --agree-tos --nginx-server-root /etc/nginx --nginx-ctl $(which nginx) -d ${i} -w /var/www/letsencrypt
- fi
-done
+if [[ -n ${DOMAINS} ]]; then
+    echo "No domain to process."
+else
+    for i in $DOMAINS;
+    do
+        if [[ ${CERTED[*]} =~ "${i}"  ]]; then
+            echo "Certificate already exist for ${i}"
+        else
+            echo "No ready certificate for ${i}. We'll request for one."
+            certbot --nginx -n ${PARAM} --agree-tos --nginx-server-root /etc/nginx --nginx-ctl $(which nginx) -d ${i} -w /var/www/letsencrypt
+        fi
+    done
+fi

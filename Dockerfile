@@ -9,4 +9,4 @@ FROM stage
 VOLUME [ "/etc/letsencrypt", "/etc/nginx", "/var/www" ]
 EXPOSE 80 443
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
-CMD [ "executable" ]
+CMD [ "runner.sh" ]
