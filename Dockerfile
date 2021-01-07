@@ -12,5 +12,5 @@ COPY NOFILE /var/www/letsencrypt/
 FROM stage
 VOLUME [ "/etc/letsencrypt", "/etc/nginx", "/var/www" ]
 EXPOSE 80 443
-# ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENTRYPOINT [ "sh" ]
 CMD [ "/runner.sh" ]
