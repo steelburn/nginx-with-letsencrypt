@@ -2,9 +2,12 @@
 LIVEDIR=/etc/letsencrypt/live
 NGCONF=/etc/nginx/nginx.conf
 DOMAINS=$(grep server_name /etc/nginx/nginx.conf | uniq | awk '{ sub(";","",$2); print $2 }')
-CERTED=$(ls $LIVEDIR)
-echo $CERTED
-echo $DOMAINS
+
+if [[ -d $LIVEDIR ]]; then
+    CERTED=$(ls $LIVEDIR)
+    else
+    CERTED=()
+fi
 
 # Let's use the email address passed via environment variable, if provided.
 if [[ -n ${EMAIL} ]]; then
