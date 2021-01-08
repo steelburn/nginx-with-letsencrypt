@@ -1,6 +1,6 @@
 FROM debian:stable-slim as stage1
 RUN apt update -qqq && \
-    DEBIAN_FRONTEND=noninteractive apt install -qq nginx-full watch certbot python3-certbot-nginx && \
+    DEBIAN_FRONTEND=noninteractive apt install -qqy nginx-full watch certbot python3-certbot-nginx && \
     rm -rf /var/lib/apt/lists 
 
 FROM stage1 as stage2
