@@ -12,7 +12,8 @@ docker run -p80:80 -p443:443 steelburn/nginx-with-letsencrypt
 #### Adding new virtual hosts
 Edit /etc/nginx.conf, and put in a basic configuration for your domain. Do not put your virtual host in /etc/nginx/conf.d 
 Example:
-``
+
+```
  server {
    server_name abc.xyz;
    location / {
@@ -21,7 +22,7 @@ Example:
         proxy_set_header X-Real-IP $remote_addr;
    }
  }
-``
+```
 
 #### Volumes
 These volumes can be mounted:
